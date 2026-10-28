@@ -1,26 +1,516 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 10rem;
+@font-face {
+  font-family: "Player 2";
+  src: url("/fonts/Player2FreeRegular-yY6q2.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Home Video";
+  src: url("/fonts/HomeVideo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Home Video";
+  src: url("/fonts/HomeVideo-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base */
+
+:root {
+  font-family: "Inter", sans-serif;
+  color: #491016;
+  background: #310910;
+  font-synthesis: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #b8802d;
+  outline-offset: 5px;
 }
 
 ::selection {
-  background: #22d3ee;
-  color: #020617;
+  color: #f6e6c9;
+  background: #57131d;
+}
+
+/* Layout */
+
+.site-shell {
+  min-height: 100vh;
+  background: radial-gradient(
+    ellipse at 45% 30%,
+    #53131e 0%,
+    #3d0c15 55%,
+    #29070d 100%
+  );
+}
+
+.page-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 34px 28px 54px;
+}
+
+/* Navigation */
+
+.site-nav {
+  border-bottom: 2px solid #211a15;
+  background: linear-gradient(110deg, #f6e7ce, #ecd7b9);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 28px;
+}
+
+.brand {
+  font-family: "Player 2", monospace;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-links a {
+  display: inline-block;
+  padding-bottom: 5px;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  border-color: #b8802d;
+}
+
+/* Window */
+
+.retro-window {
+  overflow: hidden;
+  padding: 4px;
+  border: 2px solid #211a15;
+  border-radius: 7px;
+  background: #f3e1c2;
+  box-shadow:
+    0 0 0 1px #d7bd97,
+    12px 14px 0 rgb(15 2 5 / 45%);
+}
+
+.window-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  padding: 5px 9px 5px 14px;
+  border: 2px solid #211a15;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(100deg, #f7e9d2, #ead2af);
+  color: #211a15;
+  font-family: monospace;
+  font-size: 18px;
+}
+
+.window-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.window-controls span {
+  display: grid;
+  width: 30px;
+  height: 29px;
+  place-items: center;
+  border: 2px solid #211a15;
+  border-radius: 2px;
+  background: #f5e6cd;
+  box-shadow: inset 1px 1px 0 #fff8ec;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.retro-window > div:last-child {
+  border: 2px solid #211a15;
+  border-top: 0;
+}
+
+/* Hero — overrides the typography utilities in Hero.tsx */
+
+#hero-title {
+  margin: 0 0 24px;
+  font-family: "Player 2", monospace;
+  font-size: clamp(44px, 8vw, 140px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+.hero-scene {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 560px;
+  aspect-ratio: 1829 / 860;
+  background: #e8cfaa url("/images/hero-background.png") center / cover
+    no-repeat;
+}
+
+.hero-copy {
+  position: relative;
+  width: 58%;
+  padding: 40px 6%;
+}
+
+.hero-copy p {
+  margin: 8px 0;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+/* Buttons */
+
+.retro-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 20px;
+  border: 2px solid #241b16;
+  background: linear-gradient(120deg, #dfb357, #c79233);
+  box-shadow: 4px 4px 0 #6b4228;
+  color: #241b16;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    transform 150ms,
+    box-shadow 150ms;
+}
+
+.retro-button.secondary {
+  background: linear-gradient(120deg, #f9ecd6, #ead5b7);
+}
+
+.retro-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #6b4228;
+}
+
+/* Folders */
+
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 42px;
+}
+
+.folder-card {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  min-width: 0;
+  margin-top: 17px;
+  padding: 28px 26px 20px;
+  border: 2px solid #241b16;
+  border-radius: 0 7px 7px 7px;
+  background: linear-gradient(115deg, #f5e6cc, #ead4b3);
+  box-shadow: 9px 11px 0 rgb(15 2 5 / 45%);
+  transition: transform 150ms;
+}
+
+.folder-card::before {
+  position: absolute;
+  top: -19px;
+  left: -2px;
+  width: 108px;
+  height: 20px;
+  border: 2px solid #241b16;
+  border-bottom: 0;
+  border-radius: 7px 16px 0 0;
+  background: #f4e4c9;
+  content: "";
+}
+
+.folder-card::after {
+  position: absolute;
+  inset: 7px 5px 5px;
+  border: 1.5px solid #241b16;
+  border-radius: 4px;
+  pointer-events: none;
+  content: "";
+}
+
+.folder-card:hover {
+  transform: translateY(-4px);
+}
+
+.folder-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #77614d;
+}
+
+.folder-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 34px;
+  height: 27px;
+  border: 2px solid #342316;
+  background: linear-gradient(120deg, #d9aa4a, #bb822d);
+  box-shadow: 3px 3px 0 #6b4228;
+}
+
+.folder-icon::before {
+  position: absolute;
+  top: -9px;
+  left: -2px;
+  width: 19px;
+  height: 9px;
+  border: 2px solid #342316;
+  border-bottom: 0;
+  border-radius: 3px 5px 0 0;
+  background: #d4a047;
+  content: "";
+}
+
+.folder-heading h2 {
+  min-width: 0;
+  margin: 0;
+  font-family: "Home Video", monospace;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.folder-number {
+  align-self: flex-start;
+  margin-left: auto;
+  color: #956322;
+  font-size: 13px;
+}
+
+.folder-description {
+  margin: 17px 0 0;
+  color: #30251e;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.folder-arrow {
+  display: block;
+  margin-top: 8px;
+  color: #211a15;
+  text-align: right;
+  font-size: 28px;
+}
+
+/* About */
+
+.story-preview {
+  margin-top: 44px;
+  padding: 30px;
+  border: 2px solid #241b16;
+  border-radius: 4px;
+  background: linear-gradient(115deg, #f5e6cc, #ead4b3);
+  box-shadow:
+    inset 0 0 0 5px #f3e1c2,
+    8px 10px 0 rgb(15 2 5 / 40%);
+  scroll-margin-top: 24px;
+}
+
+.story-preview h2 {
+  margin: 0 0 16px;
+  font-family: "Home Video", monospace;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.story-preview p {
+  margin: 0;
+  color: #30251e;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.site-footer {
+  padding: 24px;
+  color: #f6e6c9;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .nav-links {
+    gap: 10px 20px;
+    font-size: 13px;
+  }
+
+  .hero-scene {
+    min-height: 480px;
+  }
+
+  .hero-copy {
+    width: 65%;
+    padding: 30px;
+  }
+
+  .folder-grid {
+    gap: 22px;
+  }
+
+  .folder-card {
+    padding: 24px 20px 18px;
+  }
+
+  .folder-heading {
+    flex-wrap: wrap;
+  }
+
+  .folder-heading h2 {
+    font-size: 20px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .nav-inner {
+    padding: 16px 20px;
+  }
+
+  .brand {
+    font-size: 21px;
+  }
+
+  .page-container {
+    padding: 24px 16px 40px;
+  }
+
+  .window-bar {
+    padding-left: 10px;
+    font-size: 15px;
+  }
+
+  .window-controls span {
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+  }
+
+  #hero-title {
+    font-size: clamp(30px, 8.5vw, 56px);
+  }
+
+  .hero-scene {
+    min-height: 640px;
+    aspect-ratio: auto;
+    align-items: flex-start;
+    background-position: right bottom;
+    background-size: auto 330px;
+  }
+
+  .hero-copy {
+    width: 100%;
+    padding: 32px 20px;
+  }
+
+  .hero-actions {
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .retro-button {
+    padding: 8px 14px;
+  }
+
+  .folder-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 32px;
+  }
+
+  .story-preview {
+    padding: 24px;
+  }
+
+  .story-preview h2 {
+    font-size: 24px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   *,
   *::before,
   *::after {

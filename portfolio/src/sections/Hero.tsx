@@ -1,61 +1,67 @@
-import Button from '../components/ui/Button'
-
 export default function Hero() {
   return (
-    <section
-      id="home"
-      className="grid min-h-[80vh] items-center gap-12 py-20 lg:grid-cols-[1.3fr_1fr]"
-    >
-      <div>
-        <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-cyan-400">
-          Data · Design · Development
-        </p>
+    <section className="retro-window" aria-labelledby="hero-title">
+      <div className="window-bar">
+        <span>taylor.exe</span>
 
-        <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl">
-          Turning data into
-          <span className="block text-cyan-400">clearer decisions.</span>
-        </h1>
-
-        <p className="mt-6 max-w-xl text-lg leading-8 text-slate-400">
-          A portfolio of projects exploring analytics, business intelligence
-          and thoughtful digital experiences.
-        </p>
-
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Button href="#projects">Explore Projects ↗</Button>
-          <Button href="#contact" variant="secondary">
-            Get in Touch
-          </Button>
+        <div className="window-controls" aria-hidden="true">
+          <span>−</span>
+          <span>□</span>
+          <span>×</span>
         </div>
       </div>
 
       <div
-        aria-hidden="true"
-        className="rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8"
+        className="relative isolate overflow-hidden border border-t-0 border-[#39281d] bg-[#e8cfaa]"
       >
-        <div className="mb-8 flex items-center gap-2">
-          <span className="h-3 w-3 rounded-full bg-red-400" />
-          <span className="h-3 w-3 rounded-full bg-amber-400" />
-          <span className="h-3 w-3 rounded-full bg-emerald-400" />
-          <span className="ml-3 font-mono text-xs text-slate-500">
-            workflow.ts
-          </span>
-        </div>
+        {/* Background artwork */}
+        <img
+          src={`${import.meta.env.BASE_URL}images/hero-background.png`}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-right"
+        />
 
-        <div className="space-y-5 font-mono text-sm sm:text-base">
-          <p className="text-slate-500">// From questions to understanding</p>
-          <p>
-            <span className="text-purple-400">const</span> workflow = [
-          </p>
-
-          <div className="space-y-4 pl-6 text-cyan-300">
-            <p>'Understand the problem',</p>
-            <p>'Prepare the data',</p>
-            <p>'Build the model',</p>
-            <p>'Communicate the insight'</p>
+        <div className="grid min-h-[560px] grid-cols-1 lg:grid-cols-[25%_42%_33%]">
+          {/* Portrait */}
+          <div className="relative order-2 h-[340px] lg:order-1 lg:h-auto">
+            <img
+              src={`${import.meta.env.BASE_URL}images/portrait.png`}
+              alt="Taylor"
+              className="absolute bottom-0 left-1/2 h-[95%] w-full -translate-x-1/2 object-contain object-bottom lg:left-0 lg:h-[85%] lg:w-[120%] lg:translate-x-0"
+            />
           </div>
 
-          <p>]</p>
+          {/* Introduction */}
+          <div className="relative z-10 order-1 self-center px-6 py-12 lg:order-2 lg:-translate-y-25 lg:px-4 lg:py-16">
+            <h1
+              id="hero-title"
+              className="mb-6 font-['Home_Video',monospace] text-[clamp(32px,5vw,76px)] leading-[1.15] font-bold"
+            >
+              SCRAMBLE
+            </h1>
+
+            <p className="text-base leading-7">
+              My story starts with a Rubik’s Cube.
+            </p>
+
+            <p className="mt-2 text-base leading-7">
+              I’m Taylor. And I’m still curious about the next move.
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-4">
+              <a href="./projects" className="retro-button">
+                Explore my work →
+              </a>
+
+              <a href="#about" className="retro-button secondary">
+                About me
+              </a>
+            </div>
+          </div>
+
+          {/* Space for the computer artwork on desktop */}
+          <div className="hidden lg:order-3 lg:block" aria-hidden="true" />
         </div>
       </div>
     </section>
