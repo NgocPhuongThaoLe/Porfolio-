@@ -1,0 +1,397 @@
+.learning-page {
+  color: #491016;
+}
+
+.learning-page .learning-content {
+  padding: clamp(24px, 5vw, 68px);
+  background: #f5e6cc;
+}
+
+/* Introduction */
+
+.learning-page .learning-header {
+  max-width: 900px;
+}
+
+.learning-page .learning-eyebrow {
+  margin: 0;
+  color: #76573b;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.8;
+  letter-spacing: 0.14em;
+}
+
+.learning-page h1 {
+  margin: 22px 0;
+  font-family: "Home Video", monospace;
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.learning-page .learning-intro {
+  max-width: 620px;
+  margin: 0;
+  color: #51443b;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+/* Section headings */
+
+.learning-page .learning-section {
+  margin-top: 52px;
+}
+
+.learning-page .learning-section-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #491016;
+}
+
+.learning-page .learning-section-heading > span {
+  flex-shrink: 0;
+  color: #76573b;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.learning-page h2 {
+  margin: 0;
+  font-family: "Home Video", monospace;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Current learning */
+
+.learning-page .learning-exploring {
+  padding: 30px;
+  border: 1px solid #a28665;
+  background: #f9edd9;
+}
+
+.learning-page .learning-status {
+  display: inline-block;
+  padding: 6px 10px;
+  border: 1px solid #bca17e;
+  background: #eddbbd;
+  color: #62452f;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.learning-page h3 {
+  margin: 20px 0 14px;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.learning-page .learning-exploring > p {
+  max-width: 850px;
+  margin: 0;
+  color: #30251e;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.learning-page .learning-exploring > p + p {
+  margin-top: 16px;
+}
+
+/* Platform cards */
+
+.learning-page .learning-platform-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.learning-page .learning-platform-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid #c4aa87;
+  background: #f2e3ca;
+}
+
+.learning-page .learning-card-number {
+  color: #806245;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.learning-page .learning-platform-card h4 {
+  margin: 16px 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.learning-page .learning-platform-card p {
+  margin: 0;
+  color: #51443b;
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+/* Project note */
+
+.learning-page .learning-project-note {
+  margin-top: 28px;
+  padding: 24px;
+  border-left: 4px solid #57131d;
+  background: #eddbbd;
+}
+
+.learning-page .learning-note-label {
+  margin: 0;
+  color: #76573b;
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+}
+
+.learning-page .learning-project-note h4 {
+  margin: 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.learning-page .learning-project-note > p:not(.learning-note-label) {
+  margin: 0;
+  color: #30251e;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.learning-page
+  .learning-project-note
+  > p:not(.learning-note-label)
+  + p {
+  margin-top: 14px;
+}
+
+/* Reflection card */
+
+.learning-page .learning-reflection {
+  border: 1px solid #a28665;
+  background: #f9edd9;
+}
+
+.learning-page .learning-reflection-header {
+  padding: 30px;
+}
+
+.learning-page .learning-reflection-header h3 {
+  margin-top: 14px;
+}
+
+.learning-page .learning-reflection-preview {
+  max-width: 700px;
+  margin: 0;
+  color: #51443b;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.learning-page .learning-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learning-page .learning-tags li {
+  padding: 6px 10px;
+  border: 1px solid #c5aa88;
+  background: #efe0c5;
+  color: #44332a;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Expandable reflection */
+
+.learning-page .learning-details {
+  border-top: 1px solid #d3bb99;
+}
+
+.learning-page .learning-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 30px;
+  background: #eddbbd;
+  color: #491016;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.7;
+  list-style: none;
+  cursor: pointer;
+}
+
+.learning-page .learning-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.learning-page .learning-details summary:hover {
+  background: #e5cdaa;
+}
+
+.learning-page .learning-close-label {
+  display: none;
+}
+
+.learning-page
+  .learning-details[open]
+  > summary
+  .learning-read-label {
+  display: none;
+}
+
+.learning-page
+  .learning-details[open]
+  > summary
+  .learning-close-label {
+  display: inline;
+}
+
+.learning-page .learning-details-icon::before {
+  content: "+";
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.learning-page
+  .learning-details[open]
+  > summary
+  .learning-details-icon::before {
+  content: "−";
+}
+
+.learning-page .learning-reflection-body {
+  display: grid;
+  gap: 26px;
+  padding: 30px;
+}
+
+.learning-page .learning-reflection-part + .learning-reflection-part {
+  padding-top: 26px;
+  border-top: 1px solid #deccb0;
+}
+
+.learning-page .learning-reflection-part h4 {
+  margin: 10px 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.learning-page
+  .learning-reflection-part
+  > p:not(.learning-note-label) {
+  max-width: 850px;
+  margin: 0;
+  color: #30251e;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* Footer */
+
+.learning-page .learning-page-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 46px;
+  padding-top: 24px;
+  border-top: 1px solid #cbb395;
+}
+
+.learning-page .learning-page-footer p {
+  margin: 0;
+  color: #695343;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.learning-page .learning-back-link {
+  display: inline-block;
+  padding: 5px 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.learning-page .learning-back-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.learning-page a:focus-visible,
+.learning-page summary:focus-visible {
+  outline: 3px solid #b8802d;
+  outline-offset: 4px;
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+  .learning-page .learning-platform-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .learning-page .learning-content {
+    padding: 28px 18px;
+  }
+
+  .learning-page h1 {
+    font-size: clamp(32px, 8vw, 54px);
+  }
+
+  .learning-page .learning-intro {
+    font-size: 14px;
+  }
+
+  .learning-page .learning-section {
+    margin-top: 38px;
+  }
+
+  .learning-page .learning-exploring,
+  .learning-page .learning-reflection-header,
+  .learning-page .learning-reflection-body {
+    padding: 22px 18px;
+  }
+
+  .learning-page .learning-project-note {
+    padding: 20px 16px;
+  }
+
+  .learning-page .learning-details summary {
+    padding: 16px 18px;
+  }
+
+  .learning-page .learning-page-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

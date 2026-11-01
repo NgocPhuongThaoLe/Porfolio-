@@ -1,43 +1,176 @@
-import PageWindow from '../components/layout/PageWindow'
+import './ContactPage.css'
+
+const contactLinks = [
+  {
+    number: '01',
+    title: 'Email',
+    value: 'thaole18082005@gmail.com',
+    href: 'mailto:thaole18082005@gmail.com',
+    external: false,
+  },
+  {
+    number: '02',
+    title: 'LinkedIn',
+    value: 'Connect with me',
+    href: 'https://www.linkedin.com/in/thao-le-964682308/',
+    external: true,
+  },
+  {
+    number: '03',
+    title: 'GitHub',
+    value: 'Explore my repositories',
+    href: 'https://github.com/ngocphuongthaole-hub',
+    external: true,
+  },
+  {
+    number: '04',
+    title: 'Phone',
+    value: '+61 411 618 771',
+    href: 'tel:+61411618771',
+    external: false,
+  },
+]
+
+const resumeUrl = '/files/Thao-Le-Resume.pdf'
 
 export default function ContactPage() {
   return (
-    <PageWindow
-      filename="contact.exe"
-      title="Let’s connect."
-      description="Contact information and a downloadable CV will be added when the final content is ready."
-    >
-      <div className="grid gap-8 lg:grid-cols-2">
-        <section className="border-2 border-[#39281d] bg-[#faefdc] p-6 sm:p-8">
-          <h2 className="mb-6 text-xl font-bold">Find me here</h2>
+    <div className="page-container contact-page">
+      <div className="retro-window">
+        <div className="window-bar">
+          <span>contact.exe</span>
 
-          <dl className="space-y-6">
-            {['Email', 'LinkedIn', 'GitHub'].map((label) => (
-              <div
-                key={label}
-                className="border-b border-[#cbb698] pb-5"
-              >
-                <dt className="text-sm font-semibold">{label}</dt>
-                <dd className="mt-2 text-sm text-[#776454]">
-                  Coming soon
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        <section className="border-2 border-[#39281d] bg-[#e5d0ae] p-6 sm:p-8">
-          <div className="flex min-h-72 flex-col items-center justify-center border border-[#bca383] bg-[#fff9ee] p-8 text-center shadow-[5px_5px_0_#bba17b]">
-            <span className="font-mono text-4xl">CV.pdf</span>
-            <h2 className="mt-6 text-lg font-semibold">
-              A closer look at my background.
-            </h2>
-            <p className="mt-3 text-sm leading-7 text-[#776454]">
-              CV preview and download will appear here.
-            </p>
+          <div className="window-controls" aria-hidden="true">
+            <span>−</span>
+            <span>□</span>
+            <span>×</span>
           </div>
-        </section>
+        </div>
+
+        <div className="contact-content">
+          <header className="contact-header">
+            <p className="contact-eyebrow">LET’S CONNECT</p>
+
+            <h1>Contact & CV.</h1>
+
+            <p className="contact-intro">
+              Have an opportunity, a project idea, or something you’d
+              like to chat about? I’d love to hear from you.
+            </p>
+
+            <p className="contact-location">
+              <span className="contact-location-dot" aria-hidden="true" />
+              Based in Sydney · Open to relocation
+            </p>
+          </header>
+
+          <div className="contact-main-grid">
+            <section
+              className="contact-links-section"
+              aria-labelledby="contact-links-heading"
+            >
+              <div className="contact-section-heading">
+                <span>01</span>
+                <h2 id="contact-links-heading">Get in touch</h2>
+              </div>
+
+              <div className="contact-links-grid">
+                {contactLinks.map((link) => (
+                  <a
+                    key={link.title}
+                    href={link.href}
+                    className="contact-card"
+                    target={link.external ? '_blank' : undefined}
+                    rel={
+                      link.external
+                        ? 'noopener noreferrer'
+                        : undefined
+                    }
+                  >
+                    <div className="contact-card-top">
+                      <span className="contact-card-number">
+                        {link.number}
+                      </span>
+
+                      <span
+                        className="contact-card-arrow"
+                        aria-hidden="true"
+                      >
+                        ↗
+                      </span>
+                    </div>
+
+                    <h3>{link.title}</h3>
+                    <p>{link.value}</p>
+                  </a>
+                ))}
+              </div>
+            </section>
+
+            <section
+              className="contact-cv-section"
+              aria-labelledby="contact-cv-heading"
+            >
+              <div className="contact-section-heading">
+                <span>02</span>
+                <h2 id="contact-cv-heading">My CV</h2>
+              </div>
+
+              <div className="contact-cv-card">
+                <div className="contact-document" aria-hidden="true">
+                  <span className="contact-document-label">CV</span>
+
+                  <div className="contact-document-lines">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                </div>
+
+                <p className="contact-cv-eyebrow">
+                  A LITTLE MORE ABOUT MY WORK
+                </p>
+
+                <h3>Thao Le (Taylor)</h3>
+
+                <p className="contact-cv-description">
+                  My experience, education and skills, together in
+                  one document.
+                </p>
+
+                <div className="contact-cv-actions">
+                  <a
+                    href={resumeUrl}
+                    className="contact-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View CV <span aria-hidden="true">↗</span>
+                  </a>
+
+                  <a
+                    href={resumeUrl}
+                    className="contact-button contact-button-secondary"
+                    download="Thao-Le-Resume.pdf"
+                  >
+                    Download CV <span aria-hidden="true">↓</span>
+                  </a>
+                </div>
+
+                <p className="contact-file-note">PDF document</p>
+              </div>
+            </section>
+          </div>
+
+          <footer className="contact-page-footer">
+            <p>Thanks for stopping by my little corner of the web.</p>
+
+            <a href="#/" className="contact-back-link">
+              ← Back to home
+            </a>
+          </footer>
+        </div>
       </div>
-    </PageWindow>
+    </div>
   )
 }
