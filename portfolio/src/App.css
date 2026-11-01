@@ -182,3 +182,12 @@
     border-right-color: var(--border);
   }
 }
+
+.home-intro p {
+  margin: 0 0 1.25rem;
+  line-height: 1.8;
+}
+
+.home-intro p:last-child {
+  margin-bottom: 0;
+}

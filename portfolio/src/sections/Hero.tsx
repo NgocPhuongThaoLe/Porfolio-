@@ -1,4 +1,15 @@
 export default function Hero() {
+  function scrollToAbout() {
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+
+    document.getElementById('about')?.scrollIntoView({
+      behavior: reducedMotion ? 'auto' : 'smooth',
+      block: 'start',
+    })
+  }
+
   return (
     <section className="retro-window" aria-labelledby="hero-title">
       <div className="window-bar">
@@ -11,10 +22,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div
-        className="relative isolate overflow-hidden border border-t-0 border-[#39281d] bg-[#e8cfaa]"
-      >
-        {/* Background artwork */}
+      <div className="relative isolate overflow-hidden border border-t-0 border-[#39281d] bg-[#e8cfaa]">
         <img
           src={`${import.meta.env.BASE_URL}images/hero-background.png`}
           alt=""
@@ -23,7 +31,6 @@ export default function Hero() {
         />
 
         <div className="grid min-h-[560px] grid-cols-1 lg:grid-cols-[25%_42%_33%]">
-          {/* Portrait */}
           <div className="relative order-2 h-[340px] lg:order-1 lg:h-auto">
             <img
               src={`${import.meta.env.BASE_URL}images/portrait.png`}
@@ -32,35 +39,28 @@ export default function Hero() {
             />
           </div>
 
-          {/* Introduction */}
-          <div className="relative z-10 order-1 self-center px-6 py-12 lg:order-2 lg:-translate-y-25 lg:px-4 lg:py-16">
-            <h1
-              id="hero-title"
-              className="mb-6 font-['Home_Video',monospace] text-[clamp(32px,5vw,76px)] leading-[1.15] font-bold"
-            >
-              SCRAMBLE
-            </h1>
+          <div className="relative z-10 order-1 self-center px-6 py-12 lg:order-2 lg:-translate-y-8 lg:px-4 lg:py-16">
+            <h1 id="hero-title">SCRAMBLE.</h1>
 
             <p className="text-base leading-7">
-              My story starts with a Rubik’s Cube.
-            </p>
-
-            <p className="mt-2 text-base leading-7">
-              I’m Taylor. And I’m still curious about the next move.
+              Somehow, I'm finding my own path.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-4">
-              <a href="./projects" className="retro-button">
-                Explore my work →
-              </a>
-
-              <a href="#about" className="retro-button secondary">
+              <button
+                type="button"
+                onClick={scrollToAbout}
+                className="retro-button secondary cursor-pointer"
+              >
                 About me
+              </button>
+
+              <a href="#/projects" className="retro-button">
+                Explore my work →
               </a>
             </div>
           </div>
 
-          {/* Space for the computer artwork on desktop */}
           <div className="hidden lg:order-3 lg:block" aria-hidden="true" />
         </div>
       </div>
