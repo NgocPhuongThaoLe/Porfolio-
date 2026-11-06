@@ -1,10 +1,75 @@
 import { useState } from 'react'
 import PageWindow from '../components/layout/PageWindow'
 
-const projects = [
+type Project = {
+  id: string
+  number: string
+  title: string
+  category: string
+  image: string
+  technologies: string[]
+  description: string
+  role: string
+  highlight: string
+  sections: {
+    title: string
+    text: string
+  }[]
+  links: {
+    label: string
+    href: string
+  }[]
+}
+
+const projects: Project[] = [
+  {
+    id: 'hillview',
+    number: '01',
+    title: 'Hillview Climate Discovery Stations',
+    category: 'MQBS3010 Capstone · University Project',
+    image: '/images/hillview-1.png',
+    technologies: [
+      'System Design',
+      'Data Modelling',
+      'Digital Prototype',
+      'SDG 13',
+    ],
+    description:
+      'Designing a connected digital experience for climate education, from discovering programs and booking visits to recording participation and reviewing progress.',
+    role: 'Business Information Systems contributor · Team Q5',
+    highlight:
+      'Discover → Book → Participate → Track · Three-page prototype',
+    sections: [
+      {
+        title: 'Project overview',
+        text: 'An interdisciplinary university capstone proposal for Hillview Estate and The King’s Foundation Australia. Our team combined Marketing, Finance, Accounting, Business Analytics and Business Information Systems to explore a climate education initiative supporting SDG 13.',
+      },
+      {
+        title: 'My contribution',
+        text: 'Developed the Business Information Systems section, proposing how a digital platform could connect visitor experiences, operational records and management reporting. Designed the visitor journey, information system architecture and conceptual data model.',
+      },
+      {
+        title: 'Three-page prototype',
+        text: 'Explore & Book helps visitors discover programs and arrange a visit. Climate Passport supports QR-based activities and records completion. My Progress allows visitors to review completed activities, access participation badges and submit feedback.',
+      },
+      {
+        title: 'System & data design',
+        text: 'Proposed connecting bookings, program participation, visitor feedback and environmental measurements through a central relational database. The design would support reporting on participant reach, climate knowledge, intended behaviour change and environmental outcomes.',
+      },
+      {
+        title: 'Responsible implementation',
+        text: 'Recommended introducing essential booking, participation and reporting functions first. The proposal includes data validation, role-based access, privacy safeguards and physical alternatives to QR check-ins. Advanced analytics and AI would follow only when reliable data and clear benefits justify the investment.',
+      },
+      {
+        title: 'Outcome & reflection',
+        text: 'Produced a system proposal and illustrative prototype rather than a deployed operational platform. This project helped me connect business needs with digital journeys and data structures, while considering accessibility, implementation costs and the limits of environmental impact claims.',
+      },
+    ],
+    links: [],
+  },
   {
     id: 'e-wallet',
-    number: '01',
+    number: '02',
     title: 'E-wallet Transaction Analytics',
     category: 'Data Analytics',
     image: '/images/e-wallet.png',
@@ -40,7 +105,7 @@ const projects = [
   },
   {
     id: 'datafest',
-    number: '02',
+    number: '03',
     title: 'DataFest Patient Journey Analysis',
     category: 'Business Intelligence',
     image: '/images/datafest.png',
@@ -80,7 +145,7 @@ const projects = [
   },
   {
     id: 'abc-fashion',
-    number: '03',
+    number: '04',
     title: 'ABC Fashion AI Shopping Stylist',
     category: 'Data Modelling & Development',
     image: '/images/abc-fashion.png',
@@ -124,32 +189,54 @@ const projects = [
   },
 ]
 
-type Project = (typeof projects)[number]
+const hillviewImages = [
+  {
+    src: '/images/hillview-1.png',
+    title: 'Explore & Book',
+    description: 'Discover climate programs and arrange a visit.',
+  },
+  {
+    src: '/images/hillview-2.png',
+    title: 'Climate Passport',
+    description: 'Take part in activities and record completion.',
+  },
+  {
+    src: '/images/hillview-3.png',
+    title: 'My Progress',
+    description: 'Review activities, badges and feedback.',
+  },
+]
 
-function ProjectImage({ project }: { project: Project }) {
+function PreviewImage({
+  src,
+  alt,
+  contain = false,
+}: {
+  src: string
+  alt: string
+  contain?: boolean
+}) {
   const [imageError, setImageError] = useState(false)
 
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden border border-[#bca383] bg-[#e5d0ae]">
+    <div
+      className={`w-full overflow-hidden border border-[#bca383] bg-[#e5d0ae] ${
+        contain ? '' : 'relative aspect-[16/10]'
+      }`}
+    >
       {imageError ? (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-4 text-center text-[#80532d]">
-          <span className="font-['Home_Video',monospace] text-6xl">
-            {project.number}
-          </span>
-
-          <span className="text-xs uppercase tracking-widest">
-            {project.category}
-          </span>
-
-          <span className="text-xs">
-            Project preview coming soon
-          </span>
+        <div className="flex min-h-48 items-center justify-center p-5 text-center text-sm text-[#80532d]">
+          {alt}
         </div>
       ) : (
         <img
-          src={project.image}
-          alt={`${project.title} preview`}
-          className="absolute inset-0 block h-full w-full object-cover object-top"
+          src={src}
+          alt={alt}
+          className={
+            contain
+              ? 'block h-auto w-full'
+              : 'absolute inset-0 block h-full w-full object-cover object-top'
+          }
           onError={() => setImageError(true)}
         />
       )}
@@ -157,101 +244,288 @@ function ProjectImage({ project }: { project: Project }) {
   )
 }
 
+function TechnologyTags({
+  technologies,
+}: {
+  technologies: string[]
+}) {
+  return (
+    <ul
+      className="flex flex-wrap gap-2"
+      aria-label="Tools and skills"
+    >
+      {technologies.map((technology) => (
+        <li
+          key={technology}
+          className="border border-[#bca383] px-2 py-1 text-xs leading-5"
+        >
+          {technology}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function HillviewProject({ project }: { project: Project }) {
+  const linkClass =
+    'font-semibold underline underline-offset-4 hover:text-[#936322]'
+
+  return (
+    <section
+      aria-labelledby="hillview-title"
+      className="border-2 border-[#39281d] bg-[#faefdc] p-5 shadow-[5px_5px_0_#c8ae87] sm:p-8"
+    >
+      <header className="max-w-4xl">
+        <p className="text-xs leading-6 font-semibold uppercase tracking-widest text-[#936322]">
+          Featured project / {project.category}
+        </p>
+
+        <h2
+          id="hillview-title"
+          className="mt-3 text-2xl leading-snug font-bold sm:text-3xl"
+        >
+          {project.title}
+        </h2>
+
+        <p className="mt-4 text-sm leading-7 text-[#635044]">
+          {project.description}
+        </p>
+
+        <p className="mt-4 text-xs leading-6 text-[#635044]">
+          {project.role}
+        </p>
+
+        <div className="mt-5">
+          <TechnologyTags technologies={project.technologies} />
+        </div>
+      </header>
+
+      <div className="mt-8 border-y border-[#cbb698] py-4">
+        <p className="text-sm leading-7 font-semibold">
+          Discover → Book → Participate → Track
+        </p>
+
+        <p className="mt-1 text-xs leading-6 text-[#635044]">
+          Proposed digital platform · Three-page illustrative prototype
+        </p>
+      </div>
+
+      <div className="mt-7 grid gap-6 lg:grid-cols-3">
+        {hillviewImages.map((image, index) => (
+          <figure key={image.src} className="min-w-0">
+            <PreviewImage
+              src={image.src}
+              alt={`Hillview prototype: ${image.title}`}
+              contain
+            />
+
+            <figcaption className="mt-4">
+              <h3 className="text-sm font-bold">
+                <span className="mr-2 font-mono text-[#936322]">
+                  0{index + 1}
+                </span>
+                {image.title}
+              </h3>
+
+              <p className="mt-2 text-xs leading-6 text-[#635044]">
+                {image.description}
+              </p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <div className="mt-8 grid gap-6 border-t border-[#cbb698] pt-7 md:grid-cols-2">
+        {project.sections.map((section) => (
+          <section key={section.title}>
+            <h3 className="text-sm font-bold">{section.title}</h3>
+
+            <p className="mt-2 text-sm leading-7 text-[#635044]">
+              {section.text}
+            </p>
+          </section>
+        ))}
+      </div>
+
+      <section
+        aria-labelledby="industry-insights-title"
+        className="mt-8 border-t border-[#cbb698] pt-7"
+      >
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#936322]">
+          Learning from industry
+        </p>
+
+        <h3
+          id="industry-insights-title"
+          className="mt-3 text-lg font-bold"
+        >
+          Perspectives that shaped my proposal
+        </h3>
+
+        <div className="mt-5 grid gap-5 md:grid-cols-2">
+          <div className="border-l-2 border-[#936322] bg-[#f3e5ce] p-5">
+            <p className="text-sm leading-7 text-[#635044]">
+              The{' '}
+              <a
+                href="https://www.linkedin.com/in/dchaitow/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                Chief Financial Officer
+              </a>{' '}
+              emphasised prioritisation and understanding trade-offs.
+              I applied this to Hillview by prioritising essential
+              digital functions before advanced AI.
+            </p>
+          </div>
+
+          <div className="border-l-2 border-[#936322] bg-[#f3e5ce] p-5">
+            <p className="text-sm leading-7 text-[#635044]">
+              The{' '}
+              <a
+                href="https://www.linkedin.com/in/zacci-ashraf-54620a3b2/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                Clinical Research Nurse
+              </a>{' '}
+              highlighted checking data accuracy before presenting
+              evidence. This informed my recommendations for data
+              validation and reliable participation records.
+            </p>
+          </div>
+        </div>
+      </section>
+    </section>
+  )
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  return (
+    <article className="flex min-w-0 flex-col border-2 border-[#39281d] bg-[#faefdc] p-5 shadow-[5px_5px_0_#c8ae87] sm:p-6">
+      <PreviewImage
+        src={project.image}
+        alt={`${project.title} preview`}
+      />
+
+      <div className="mt-6 flex flex-1 flex-col">
+        <p className="text-xs leading-5 font-semibold uppercase tracking-wide text-[#936322]">
+          {project.category}
+        </p>
+
+        <h3 className="mt-3 text-xl leading-snug font-bold xl:min-h-[84px]">
+          {project.title}
+        </h3>
+
+        <p className="mt-4 text-sm leading-7 text-[#635044] xl:min-h-[140px]">
+          {project.description}
+        </p>
+
+        <p className="mt-5 border-y border-[#cbb698] py-3 text-xs leading-6 font-semibold xl:min-h-[74px]">
+          {project.highlight}
+        </p>
+
+        <div className="mt-5 xl:min-h-[68px]">
+          <TechnologyTags technologies={project.technologies} />
+        </div>
+
+        <p className="mt-5 text-xs leading-6 text-[#635044] xl:min-h-[48px]">
+          {project.role}
+        </p>
+
+        <details className="group mt-5 border-t border-[#cbb698]">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-4 text-sm font-semibold hover:text-[#936322] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#936322] [&::-webkit-details-marker]:hidden">
+            Explore project
+
+            <span
+              aria-hidden="true"
+              className="text-xl leading-none group-open:rotate-45"
+            >
+              +
+            </span>
+          </summary>
+
+          <div className="space-y-5 pb-6">
+            {project.sections.map((section) => (
+              <section key={section.title}>
+                <h4 className="text-sm font-bold">{section.title}</h4>
+
+                <p className="mt-2 text-sm leading-7 text-[#635044]">
+                  {section.text}
+                </p>
+              </section>
+            ))}
+          </div>
+        </details>
+
+        {project.links.length > 0 && (
+          <div className="mt-auto flex flex-wrap items-start gap-x-5 gap-y-3 border-t border-[#cbb698] pt-4">
+            {project.links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs leading-6 font-semibold underline underline-offset-4 hover:text-[#936322]"
+              >
+                {link.label}{' '}
+                <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+  )
+}
+
 export default function ProjectsPage() {
+  const hillview = projects.find(
+    (project) => project.id === 'hillview',
+  )
+
+  const otherProjects = projects.filter(
+    (project) => project.id !== 'hillview',
+  )
+
   return (
     <PageWindow
       filename="projects.exe"
       title="Things I’ve worked on."
-      description="A selection of projects exploring data, dashboards and application development. Each one reflects something I’ve built, learned or figured out along the way."
+      description="A selection of projects exploring data, digital experiences and system design. Each one reflects something I’ve built, learned or figured out along the way."
     >
-      <div className="grid items-stretch gap-7 xl:grid-cols-3">
-        {projects.map((project) => (
-          <article
-            key={project.id}
-            className="flex min-w-0 flex-col border-2 border-[#39281d] bg-[#faefdc] p-5 shadow-[5px_5px_0_#c8ae87] sm:p-6"
+      {hillview && <HillviewProject project={hillview} />}
+
+      <section
+        aria-labelledby="other-projects-title"
+        className="mt-14"
+      >
+        <header className="mb-7">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#936322]">
+            More to explore
+          </p>
+
+          <h2
+            id="other-projects-title"
+            className="mt-3 font-['Home_Video',monospace] text-2xl font-bold"
           >
-            <ProjectImage project={project} />
+            Other projects.
+          </h2>
 
-            <div className="mt-6 flex flex-1 flex-col">
-              <p className="text-xs leading-5 font-semibold uppercase tracking-wide text-[#936322]">
-                {project.category}
-              </p>
+          <p className="mt-3 text-sm leading-7 text-[#635044]">
+            Working with transaction data, healthcare insights
+            and an AI-assisted shopping experience.
+          </p>
+        </header>
 
-              <h2 className="mt-3 text-xl leading-snug font-bold xl:min-h-[84px]">
-                {project.title}
-              </h2>
-
-              <p className="mt-4 text-sm leading-7 text-[#635044] xl:min-h-[140px]">
-                {project.description}
-              </p>
-
-              <p className="mt-5 border-y border-[#cbb698] py-3 text-xs leading-6 font-semibold xl:min-h-[74px]">
-                {project.highlight}
-              </p>
-
-              <ul
-                className="mt-5 flex flex-wrap content-start gap-2 xl:min-h-[68px]"
-                aria-label="Technologies"
-              >
-                {project.technologies.map((technology) => (
-                  <li
-                    key={technology}
-                    className="self-start border border-[#bca383] px-2 py-1 text-xs leading-5"
-                  >
-                    {technology}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-5 text-xs leading-6 text-[#635044] xl:min-h-[48px]">
-                {project.role}
-              </p>
-
-              <details className="group mt-5 border-t border-[#cbb698]">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-4 text-sm font-semibold hover:text-[#936322] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#936322] [&::-webkit-details-marker]:hidden">
-                  Explore project
-
-                  <span
-                    aria-hidden="true"
-                    className="text-xl leading-none group-open:rotate-45"
-                  >
-                    +
-                  </span>
-                </summary>
-
-                <div className="space-y-5 pb-6">
-                  {project.sections.map((section) => (
-                    <section key={section.title}>
-                      <h3 className="text-sm font-bold">
-                        {section.title}
-                      </h3>
-
-                      <p className="mt-2 text-sm leading-7 text-[#635044]">
-                        {section.text}
-                      </p>
-                    </section>
-                  ))}
-                </div>
-              </details>
-
-              <div className="mt-auto flex flex-wrap items-start gap-x-5 gap-y-3 border-t border-[#cbb698] pt-4">
-                {project.links.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs leading-6 font-semibold underline underline-offset-4 hover:text-[#936322]"
-                  >
-                    {link.label}{' '}
-                    <span aria-hidden="true">↗</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
+        <div className="grid items-stretch gap-7 xl:grid-cols-3">
+          {otherProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </section>
     </PageWindow>
   )
 }
